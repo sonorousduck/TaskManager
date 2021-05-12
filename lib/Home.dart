@@ -3,6 +3,7 @@ import 'package:task_manager/BottomNavBarFragments/HomePageFragment.dart';
 import 'package:task_manager/BottomNavBarFragments/ScheduleFragment.dart';
 import 'package:task_manager/BottomNavBarFragments/SettingsFragment.dart';
 import 'package:task_manager/BottomNavBarFragments/TasksFragment.dart';
+import 'package:task_manager/tasks/newTask.dart';
 
 
 class Home extends StatelessWidget {
@@ -29,6 +30,7 @@ class MyHome extends StatefulWidget {
 
 class _MyHomeState extends State<MyHome> {
   int _selectedIndex = 0;
+  bool shouldShow = false;
   static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
     HomePageFragment(),
@@ -39,6 +41,12 @@ class _MyHomeState extends State<MyHome> {
 
   void _onItemTapped(int index) {
     setState(() {
+      if (index == 3 || index == 0) {
+        shouldShow = false;
+      } else {
+        shouldShow = true;
+      }
+
       _selectedIndex = index;
     });
   }
@@ -75,7 +83,7 @@ class _MyHomeState extends State<MyHome> {
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: "Settings",
-            backgroundColor: Colors.red
+            backgroundColor: Colors.red,
 
           ),
         ],
@@ -85,10 +93,36 @@ class _MyHomeState extends State<MyHome> {
         backgroundColor: Colors.black,
         // showUnselectedLabels: true,
         onTap: _onItemTapped,
+        elevation: 10.0,
       ),
-    floatingActionButton: FloatingActionButton(
-      child: Icon(Icons.add),
-      onPressed: () {  },
+
+      floatingActionButton: Visibility(
+        visible: shouldShow,
+
+        child: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {
+            if (_selectedIndex == 1) {
+              //TODO: Implement Task Schedule
+
+
+            }
+
+
+            // If on Task Page
+            if (_selectedIndex == 2) {
+              showModalBottomSheet(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(35), bottom: Radius.circular(25))
+                  ),
+                  isScrollControlled: true,
+                  context: context,
+                  builder: (context) => NewTask());
+            }
+
+
+          },
+          ),
 
     ),
 

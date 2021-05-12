@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager/buttons/genericButton.dart';
 
 
 class SettingsFragment extends StatelessWidget {
@@ -6,8 +7,13 @@ class SettingsFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text("This is the Settings Fragment"),
+    return Scaffold(
+      body: Text("This is the Settings Fragment"),
+
+
+      bottomNavigationBar: Button(text: "Sign Out", press: () {}, color: Colors.greenAccent,)
+
+
     );
   }
 }
