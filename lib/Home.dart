@@ -3,6 +3,7 @@ import 'package:task_manager/BottomNavBarFragments/HomePageFragment.dart';
 import 'package:task_manager/BottomNavBarFragments/ScheduleFragment.dart';
 import 'package:task_manager/BottomNavBarFragments/SettingsFragment.dart';
 import 'package:task_manager/BottomNavBarFragments/TasksFragment.dart';
+import 'package:task_manager/schedule/NewScheduleItem.dart';
 import 'package:task_manager/tasks/newTask.dart';
 
 
@@ -102,10 +103,15 @@ class _MyHomeState extends State<MyHome> {
         child: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {
+            // If on Schedule Page
             if (_selectedIndex == 1) {
-              //TODO: Implement Task Schedule
-
-
+              showModalBottomSheet(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(35), bottom: Radius.circular(25))
+                ),
+                isScrollControlled: true,
+                context: context,
+                builder: (context) => NewScheduleItem());
             }
 
 
